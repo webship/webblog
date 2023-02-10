@@ -24,6 +24,6 @@
   "require": {
     "drupal/core": "~10.0",
     "drupal/webpage": "~1.0",
-    "drupal/entityqueue": "~1.6"
+    "drupal/entityqueue": "@stable"
   }
 }

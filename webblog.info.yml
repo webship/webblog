@@ -1,0 +1,8 @@
+name: Web Blog
+description: 'Create Blog content type, and make views to display content.'
+type: module
+core_version_requirement: ~10.0
+dependencies:
+  - webpage:webpage
+  - media:media
+  - entityqueue:entityqueue

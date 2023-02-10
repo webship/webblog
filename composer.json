@@ -1,0 +1,29 @@
+{
+  "name": "drupal/webblog",
+  "description": "Create Blog content type, and make views to display content.",
+  "type": "drupal-module",
+  "license": "GPL-1.0-or-later",
+  "minimum-stability": "dev",
+  "authors": [
+    {
+      "name": "Webship",
+      "homepage": "http://webship.org",
+      "role": "Maintainer"
+    }
+  ],
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/webblog",
+    "source": "http://cgit.drupalcode.org/webblog"
+  },
+  "repositories": {
+    "drupal": {
+      "type": "composer",
+      "url": "https://packages.drupal.org/10"
+    }
+  },
+  "require": {
+    "drupal/core": "~10.0",
+    "drupal/webpage": "~1.0",
+    "drupal/entityqueue": "~1.6"
+  }
+}

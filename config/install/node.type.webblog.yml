@@ -8,8 +8,8 @@ third_party_settings:
     available_menus:
       - main
     parent: 'main:'
-name: Blog
-type: blog
+name: webBlog
+type: webblog
 description: ''
 help: ''
 new_revision: true

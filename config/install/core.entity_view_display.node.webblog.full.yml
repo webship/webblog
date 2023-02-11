@@ -3,13 +3,13 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.full
-    - field.field.node.blog.body
-    - field.field.node.blog.field_media
-    - node.type.blog
+    - field.field.node.webblog.body
+    - field.field.node.webblog.field_media
+    - node.type.webblog
   module:
     - layout_builder
     - layout_discovery
-    - layout_manage_display
+    - manage_display
     - text
 third_party_settings:
   layout_builder:
@@ -25,7 +25,7 @@ third_party_settings:
             uuid: b69d2e01-6379-4789-be20-8b6ef5b32eee
             region: content
             configuration:
-              id: 'field_block:node:blog:title'
+              id: 'field_block:node:webblog:title'
               label: Title
               label_display: '0'
               provider: layout_builder
@@ -45,7 +45,7 @@ third_party_settings:
             uuid: 732218fa-56b5-434a-a792-95b565d27318
             region: content
             configuration:
-              id: 'field_block:node:blog:body'
+              id: 'field_block:node:webblog:body'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
@@ -60,7 +60,7 @@ third_party_settings:
             uuid: 1d35929f-4255-4a4a-a0de-6ac258c214cf
             region: content
             configuration:
-              id: 'field_block:node:blog:field_media'
+              id: 'field_block:node:webblog:field_media'
               label: Media
               label_display: '0'
               provider: layout_builder
@@ -79,7 +79,7 @@ third_party_settings:
             uuid: 5ee63587-52de-4a96-b7ab-9aaa8145bcb9
             region: content
             configuration:
-              id: 'field_block:node:blog:created'
+              id: 'field_block:node:webblog:created'
               label: 'Authored on'
               label_display: '0'
               provider: layout_builder
@@ -97,9 +97,9 @@ third_party_settings:
             weight: -9
             additional: {  }
         third_party_settings: {  }
-id: node.blog.full
+id: node.webblog.full
 targetEntityType: node
-bundle: blog
+bundle: webblog
 mode: full
 content:
   body:

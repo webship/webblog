@@ -2,9 +2,9 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.blog.body
-    - field.field.node.blog.field_media
-    - node.type.blog
+    - field.field.node.webblog.body
+    - field.field.node.webblog.field_media
+    - node.type.webblog
   module:
     - content_moderation
     - field_layout
@@ -17,9 +17,9 @@ third_party_settings:
     id: layout_onecol
     settings:
       label: ''
-id: node.blog.default
+id: node.webblog.default
 targetEntityType: node
-bundle: blog
+bundle: webblog
 mode: default
 content:
   body:

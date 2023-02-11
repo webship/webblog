@@ -4,11 +4,11 @@ dependencies:
   config:
     - field.storage.node.field_media
     - media.type.image
-    - node.type.blog
-id: node.blog.field_media
+    - node.type.webblog
+id: node.webblog.field_media
 field_name: field_media
 entity_type: node
-bundle: blog
+bundle: webblog
 label: Media
 description: ''
 required: true

@@ -3,14 +3,14 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - entityqueue.entity_queue.featured_blogs
-    - node.type.blog
+    - entityqueue.entity_queue.featured_webblogs
+    - node.type.webblog
   module:
     - entityqueue
     - node
     - user
-id: blogs
-label: Blogs
+id: webblogs
+label: Web Blogs
 module: views
 description: ''
 tag: ''
@@ -23,7 +23,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: Blogs
+      title: Web Blogs
       fields:
         title:
           id: title
@@ -149,7 +149,7 @@ display:
           entity_field: type
           plugin_id: bundle
           value:
-            blog: blog
+            webblog: webblog
       style:
         type: grid_responsive
         options:
@@ -183,9 +183,9 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  block_blogs_list:
-    id: block_blogs_list
-    display_title: 'Blogs List Block'
+  block_webblogs_list:
+    id: block_webblogs_list
+    display_title: 'Web Blogs List Block'
     display_plugin: block
     position: 1
     display_options:
@@ -200,13 +200,13 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  block_featured_blogs:
-    id: block_featured_blogs
-    display_title: 'Featured Blogs Block'
+  block_featured_webblogs:
+    id: block_featured_webblogs
+    display_title: 'Featured Web Blogs Block'
     display_plugin: block
     position: 1
     display_options:
-      title: Blogs
+      title: Web Blogs
       pager:
         type: some
         options:
@@ -243,7 +243,7 @@ display:
           entity_type: node
           plugin_id: entity_queue
           required: true
-          limit_queue: featured_blogs
+          limit_queue: featured_webblogs
       display_description: ''
       display_extenders: {  }
     cache_metadata:
@@ -254,6 +254,6 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:entityqueue.entity_queue.featured_blogs'
+        - 'config:entityqueue.entity_queue.featured_webblogs'
         - entity_field_info
         - views_data

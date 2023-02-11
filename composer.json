@@ -1,6 +1,6 @@
 {
   "name": "drupal/webblog",
-  "description": "Create Blog content type, and make views to display content.",
+  "description": "Create Web Blog content type, and make views to display content.",
   "type": "drupal-module",
   "license": "GPL-1.0-or-later",
   "minimum-stability": "dev",
@@ -23,6 +23,7 @@
   },
   "require": {
     "drupal/core": "~10.0",
-    "drupal/webpage": "~1.0"
+    "drupal/manage_display": "~2.0",
+    "drupal/webdev": "10.0.x-dev"
   }
 }

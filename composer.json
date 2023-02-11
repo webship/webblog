@@ -23,7 +23,6 @@
   },
   "require": {
     "drupal/core": "~10.0",
-    "drupal/webpage": "~1.0",
-    "drupal/entityqueue": "@stable"
+    "drupal/webpage": "~1.0"
   }
 }

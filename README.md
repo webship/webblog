@@ -1,9 +1,12 @@
 # Web Blog
 
-### Website Blogs Content.
-Create Blog content type and add views for the home page and Blog page with Drupal.
+Enhances your Drupal site by introducing a versatile Blog content type along
+ with customized views for the home page and dedicated blog pages.
 
-* Create **Web Blog** Content Type
-* Create Web Blogs view
-** Web Blogs List Block
-** Featured Web Blogs Block
+### Key Features:
+* **Blog Content Type**: Introduces a specialized Blog content type for structured and
+ organized blogging.
+* **Custom Views**: Provides pre-configured views for the home page and
+ dedicated blog pages, streamlining the presentation of blog content.
+* **User-Friendly**: Easy-to-use interface for both content creators
+ and site visitors, promoting a seamless blogging experience.

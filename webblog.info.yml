@@ -1,7 +1,7 @@
 name: Web Blog
-description: "Create Web Blog content type, and make views to display content."
+description: "Enhances your Drupal site by introducing a versatile Blog content type along with customized views for the home page and dedicated blog pages."
 type: module
-core_version_requirement: ~10.1.0
+core_version_requirement: ~10.2.0
 dependencies:
   - drupal:path
   - drupal:text

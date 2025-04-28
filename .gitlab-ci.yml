@@ -1,60 +1,28 @@
+image: node:20
+
 stages:
-  - build
-  - lint
+  - install
   - test
 
-variables:
-  MYSQL_DATABASE: drupal
-  MYSQL_USER: drupal
-  MYSQL_PASSWORD: drupal
-  MYSQL_ROOT_PASSWORD: root
-  DB_HOST: mysql
-  SIMPLETEST_BASE_URL: "http://localhost"
-  SIMPLETEST_DB: "mysql://drupal:drupal@mysql/drupal"
-  BROWSERTEST_OUTPUT_DIRECTORY: "/var/www/html/web/sites/simpletest/browser_output"
-  COMPOSER_MEMORY_LIMIT: "-1"
-
-default:
-  image: php:8.2-apache
-  services:
-    - mysql:8
+cache:
+  paths:
+    - node_modules/
 
 before_script:
-  - apt-get update && apt-get install -y unzip git mariadb-client libpng-dev libjpeg-dev libfreetype6-dev libzip-dev libonig-dev
-  - docker-php-ext-configure gd --with-freetype --with-jpeg
-  - docker-php-ext-install gd zip pdo pdo_mysql mbstring
-  - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-  - composer install
-  - cp .env.example .env || true
+  - npm install -g webship-js
+  - npm install
 
-build:
-  stage: build
+install_dependencies:
+  stage: install
   script:
-    - echo "Building project..."
-    - composer validate
-    - composer install --prefer-dist --no-interaction
+    - echo "Installing project dependencies..."
+    - npm install
   artifacts:
     paths:
-      - vendor/
+      - node_modules/
 
-phpcs:
-  stage: lint
-  script:
-    - echo "Running PHPCS..."
-    - ./vendor/bin/phpcs --standard=PSR12 modules/custom/webbage || true
-
-phpstan:
-  stage: lint
-  script:
-    - echo "Running PHPStan..."
-    - ./vendor/bin/phpstan analyse modules/custom/webbage || true
-
-simpletest:
+run_webship_tests:
   stage: test
   script:
-    - echo "Running Simpletest..."
-    - vendor/bin/phpunit -c core modules/custom/webbage
-  artifacts:
-    when: always
-    paths:
-      - sites/simpletest/browser_output
+    - echo "Running Webship-JS tests..."
+    - npx webship run

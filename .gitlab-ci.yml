@@ -1,63 +1,90 @@
-image: php:8.2-fpm
+##################
+# General Settings
+##################
+
+include:
+  - project: 'drupal/gitlab-ci-templates'
+    ref: 'main'
+    file:
+      - '/includes/include.drupalci.variables.yml'
+      - '/includes/include.drupalci.workflows.yml'
 
 variables:
-  MYSQL_ROOT_PASSWORD: root
-  MYSQL_DATABASE: webpage
-  MYSQL_USER: webpage
-  MYSQL_PASSWORD: webpage
-  SIMPLETEST_BASE_URL: "http://localhost:8080"
+  COMPOSER: composer.json
+  COMPOSER_ROOT_VERSION: "${CI_MERGE_REQUEST_TARGET_BRANCH_NAME}${CI_COMMIT_BRANCH}-dev"
+  SIMPLE_TEST_BASE_URL: "http://127.0.0.1"
   BROWSERTEST_OUTPUT_DIRECTORY: "$CI_PROJECT_DIR/artifacts/test-results"
-  DRUPAL_VERSION: "10.2.2"
 
-services:
-  - mysql:8
-  - name: selenium/standalone-chrome:latest
-    alias: selenium
+##################
+# Stages
+##################
 
 stages:
-  - build
-  - test
-  - selenium_tests
+  - 🏗️ Build
+  - 🪄 Lint
+  - 🧪 Test
 
-before_script:
-  - apt-get update && apt-get install -y unzip git curl sqlite3 mariadb-client libpng-dev libjpeg-dev libonig-dev libxml2-dev libzip-dev libpq-dev libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libxslt-dev
-  - docker-php-ext-install pdo pdo_mysql mysqli gd mbstring xml zip opcache
-  - curl -sS https://getcomposer.org/installer | php
-  - php composer.phar install
-  - curl -OL https://ftp.drupal.org/files/projects/drupal-${DRUPAL_VERSION}.tar.gz
-  - tar -xzvf drupal-${DRUPAL_VERSION}.tar.gz --strip-components=1
-  - cp sites/default/default.settings.php sites/default/settings.php
-  - mkdir -p sites/default/files
-  - chmod -R 777 sites/default
+##################
+# Job Templates
+##################
 
-build:
-  stage: build
-  script:
+.default-job-settings: &default-job-settings
+  interruptible: true
+  allow_failure: false
+  image: "docker.io/drupalci/php-8.2-apache:production"
+  services:
+    - mysql:8
+  variables:
+    MYSQL_DATABASE: drupal
+    MYSQL_USER: drupal
+    MYSQL_PASSWORD: drupal
+    MYSQL_ROOT_PASSWORD: root
+  before_script:
+    - composer install
     - ./vendor/bin/drush site:install standard --db-url=mysql://$MYSQL_USER:$MYSQL_PASSWORD@mysql/$MYSQL_DATABASE -y
-    - ./vendor/bin/drush en webpage -y
+    - ./vendor/bin/drush en webbage -y
+
+.composer-cache: &composer-cache
+  cache:
+    key: composer-cache
+    paths:
+      - vendor/
+    policy: pull-push
+
+##################
+# Jobs
+##################
+
+'📦️ Composer Install':
+  <<: *default-job-settings
+  stage: 🏗️ Build
+  script:
+    - composer validate
+    - composer install
   artifacts:
     paths:
-      - sites/default/files
-      - sites/default/settings.php
+      - vendor/
 
-test:
-  stage: test
+'🧹 PHPCS (Coding Standards)':
+  <<: *default-job-settings
+  stage: 🪄 Lint
   script:
-    - ./vendor/bin/phpunit modules/contrib/webpage/tests/src/Functional
+    - ./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme .
+
+'🧹 PHPStan (Static Analysis)':
+  <<: *default-job-settings
+  stage: 🪄 Lint
+  script:
+    - ./vendor/bin/phpstan analyze --configuration=phpstan.neon
+
+'🧪 PHPUnit Tests':
+  <<: *default-job-settings
+  stage: 🧪 Test
+  script:
+    - ./vendor/bin/phpunit modules/custom/webbage/tests/src/Functional
   artifacts:
     when: always
     paths:
       - artifacts/test-results
     reports:
       junit: artifacts/test-results/junit.xml
-
-selenium_tests:
-  stage: selenium_tests
-  script:
-    - ./vendor/bin/drush test-run --url=http://selenium:4444/wd/hub modules/contrib/webpage/tests/src/Functional
-  artifacts:
-    when: always
-    paths:
-      - artifacts/test-results/selenium
-    reports:
-      junit: artifacts/test-results/selenium/junit.xml

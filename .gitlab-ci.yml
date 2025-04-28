@@ -2,9 +2,9 @@ image: php:8.2-fpm
 
 variables:
   MYSQL_ROOT_PASSWORD: root
-  MYSQL_DATABASE: drupal
-  MYSQL_USER: drupal
-  MYSQL_PASSWORD: drupal
+  MYSQL_DATABASE: webpage
+  MYSQL_USER: webpage
+  MYSQL_PASSWORD: webpage
   SIMPLETEST_BASE_URL: "http://localhost:8080"
   BROWSERTEST_OUTPUT_DIRECTORY: "$CI_PROJECT_DIR/artifacts/test-results"
   DRUPAL_VERSION: "10.2.2"
@@ -20,7 +20,6 @@ stages:
   - selenium_tests
 
 before_script:
- 
   - apt-get update && apt-get install -y unzip git curl sqlite3 mariadb-client libpng-dev libjpeg-dev libonig-dev libxml2-dev libzip-dev libpq-dev libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libxslt-dev
   - docker-php-ext-install pdo pdo_mysql mysqli gd mbstring xml zip opcache
   - curl -sS https://getcomposer.org/installer | php
@@ -34,9 +33,8 @@ before_script:
 build:
   stage: build
   script:
-    
     - ./vendor/bin/drush site:install standard --db-url=mysql://$MYSQL_USER:$MYSQL_PASSWORD@mysql/$MYSQL_DATABASE -y
-    - ./vendor/bin/drush en webblog -y
+    - ./vendor/bin/drush en webpage -y
   artifacts:
     paths:
       - sites/default/files
@@ -45,8 +43,7 @@ build:
 test:
   stage: test
   script:
-    
-    - ./vendor/bin/phpunit modules/contrib/webblog/tests/src/Functional
+    - ./vendor/bin/phpunit modules/contrib/webpage/tests/src/Functional
   artifacts:
     when: always
     paths:
@@ -57,8 +54,7 @@ test:
 selenium_tests:
   stage: selenium_tests
   script:
-    
-    - ./vendor/bin/drush test-run --url=http://selenium:4444/wd/hub modules/contrib/webblog/tests/src/Functional
+    - ./vendor/bin/drush test-run --url=http://selenium:4444/wd/hub modules/contrib/webpage/tests/src/Functional
   artifacts:
     when: always
     paths:

@@ -1,28 +1,43 @@
-image: node:20
-
 stages:
-  - install
+  - build
+  - lint
   - test
 
-cache:
-  paths:
-    - node_modules/
+variables:
+  COMPOSER_MEMORY_LIMIT: "-1"
+  NODE_ENV: test
+  SIMPLETEST_BASE_URL: "http://localhost"
+
+default:
+  image: node:20
 
 before_script:
-  - npm install -g webship-js
-  - npm install
+  - apt-get update && apt-get install -y curl php php-cli php-mbstring php-xml php-mysql mysql-client git
+  - npm install -g yarn
+  - yarn install
+  - yarn run webship:install
 
-install_dependencies:
-  stage: install
+build:
+  stage: build
   script:
-    - echo "Installing project dependencies..."
-    - npm install
+    - echo "Building project dependencies..."
+    - yarn install
   artifacts:
     paths:
       - node_modules/
 
-run_webship_tests:
+lint:
+  stage: lint
+  script:
+    - echo "Checking linting for Webship-JS tests..."
+    - yarn run lint
+
+webship-tests:
   stage: test
   script:
-    - echo "Running Webship-JS tests..."
-    - npx webship run
+    - echo "Executing Webship-JS automated tests..."
+    - yarn test
+  artifacts:
+    when: always
+    paths:
+      - reports/

@@ -21,9 +21,7 @@
     "lint:css": "stylelint \"**/*.css\"",
     "lint:yaml": "node ./node_modules/eslint/bin/eslint.js --ext .yml ."
   },
-  "dependencies": {  },
-  "devDependencies": { 
-    "webship-js": "~1",
+  "devDependencies": {
     "eslint": "~8",
     "eslint-config-airbnb-base": "~15",
     "eslint-config-prettier": "~8",
@@ -54,7 +52,8 @@
     "terser-webpack-plugin": "~5",
     "underscore": "~1",
     "webpack": "~5",
-    "webpack-cli": "~5"
+    "webpack-cli": "~5",
+    "webship-js": "~1"
   },
   "browserslist": [
     "last 2 Chrome major versions",

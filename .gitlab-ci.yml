@@ -8,6 +8,26 @@ include:
 
 variables:
   DRUPAL_CORE: "~11.2.0"
+  COMPOSER_MEMORY_LIMIT: "-1"
+  COMPOSER_ALLOW_SUPERUSER: "1"
+
+composer:
+  stage: build
+  image: php:8.3
+  before_script:
+    - apt-get update && apt-get install -y git unzip zip libzip-dev
+    - docker-php-ext-install zip
+    - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    - composer --version
+  script:
+    - composer validate --no-check-all --ansi
+    - composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader
+    - composer require drush/drush --no-interaction || true
+  artifacts:
+    paths:
+      - vendor/
+    expire_in: 1 hour
+  allow_failure: false
 cspell:
   stage: validate
   image: node:18

@@ -24,9 +24,13 @@ composer:
     - composer validate --no-check-all --ansi
     - composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader
     - composer require drush/drush --no-interaction || true
+    - echo "DRUPAL_CORE=${DRUPAL_CORE}" > build.env
+    - echo "CI_JOB_ID=${CI_JOB_ID}" >> build.env
   artifacts:
     paths:
       - vendor/
+    reports:
+      dotenv: build.env
     expire_in: 1 hour
   allow_failure: false
 cspell:

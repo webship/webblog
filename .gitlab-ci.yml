@@ -15,8 +15,9 @@ composer:
   stage: build
   image: php:8.3
   before_script:
-    - apt-get update && apt-get install -y git unzip zip libzip-dev
-    - docker-php-ext-install zip
+    - apt-get update && apt-get install -y git unzip zip libzip-dev libpng-dev libjpeg-dev libfreetype6-dev libonig-dev libxml2-dev
+    - docker-php-ext-configure gd --with-freetype --with-jpeg
+    - docker-php-ext-install -j$(nproc) gd zip pdo pdo_mysql mbstring xml opcache
     - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
     - composer --version
   script:

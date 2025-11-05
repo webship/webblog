@@ -1,46 +1,7 @@
-###
-### This file is the template for new projects on git.drupalcode.org.
-###
-### Copy this template to your project by selecting it from the template dropdown when you create a new file named .gitlab-ci.yml
-###
-### Contrib maintainers: No modification of this file is required. This file will work as-is. See the docs for how to create a yml file:
-### https://project.pages.drupalcode.org/gitlab_templates/info/setup/
-###
-### More resources:
-### - https://www.drupal.org/drupalorg/docs/gitlab-ci/gitlab-ci-yml
-###
 include:
   - project: $_GITLAB_TEMPLATES_REPO
     ref: $_GITLAB_TEMPLATES_REF
     file:
-      - '/includes/include.drupalci.main.yml'
-      - '/includes/include.drupalci.variables.yml'
-      - '/includes/include.drupalci.workflows.yml'
-
-###
-### You can modify this template if you have additional needs for your project.
-###
-
-variables:
-  _COMPOSER_MEMORY_LIMIT: '-1'
-
-composer_install:
-  before_script:
-    - |
-      # Fix composer dependency conflict with cweagans/composer-patches
-      composer config --no-interaction --no-plugins allow-plugins.cweagans/composer-patches true
-      composer require --dev cweagans/composer-patches:^2.0 --no-update --no-interaction || true
-
-###
-###      ___           ___           ___           ___           ___       ___
-###     /\  \         /\  \         /\__\         /\  \         /\__\     /\  \
-###    /::\  \       /::\  \       /:/  /        /::\  \       /:/  /    /::\  \
-###   /:/\:\  \     /:/\:\  \     /:/  /        /:/\:\  \     /:/  /    /:/\:\  \
-###  /:/  \:\__\   /::\~\:\  \   /:/  /  ___   /::\~\:\  \   /:/  /    /::\~\:\  \
-### /:/__/ \:|__| /:/\:\ \:\__\ /:/__/  /\__\ /:/\:\ \:\__\ /:/__/    /:/\:\ \:\__\
-### \:\  \ /:/  / \/_|::\/:/  / \:\  \ /:/  / \/__\:\/:/  / \:\  \    \/__\:\/:/  /
-###  \:\  /:/  /     |:|::/  /   \:\  /:/  /       \::/  /   \:\  \        \::/  /
-###   \:\/:/  /      |:|\/__/     \:\/:/  /        /:/  /     \:\  \       /:/  /
-###    \::/__/       |:|  |        \::/  /        /:/  /       \:\__\     /:/  /
-###     ~~            \|__|         \/__/         \/__/         \/__/     \/__/
-###
+      - "/includes/include.drupalci.main.yml"
+      - "/includes/include.drupalci.variables.yml"
+      - "/includes/include.drupalci.workflows.yml"

@@ -1,26 +1,46 @@
+###
+### This file is the template for new projects on git.drupalcode.org.
+###
+### Copy this template to your project by selecting it from the template dropdown when you create a new file named .gitlab-ci.yml
+###
+### Contrib maintainers: No modification of this file is required. This file will work as-is. See the docs for how to create a yml file:
+### https://project.pages.drupalcode.org/gitlab_templates/info/setup/
+###
+### More resources:
+### - https://www.drupal.org/drupalorg/docs/gitlab-ci/gitlab-ci-yml
+###
 include:
-  - project: 'project/gitlab_templates'
+  - project: $_GITLAB_TEMPLATES_REPO
+    ref: $_GITLAB_TEMPLATES_REF
     file:
-      - "/includes/include.drupalci.main.yml"
-      - "/includes/include.drupalci.variables.yml"
-      - "/includes/include.drupalci.workflows.yml"
+      - '/includes/include.drupalci.main.yml'
+      - '/includes/include.drupalci.variables.yml'
+      - '/includes/include.drupalci.workflows.yml'
+
+###
+### You can modify this template if you have additional needs for your project.
+###
 
 variables:
-  # Skip the problematic validation jobs for now
-  SKIP_PHPSTAN: 1
-  SKIP_PHPCS: 1
-  # Allow composer plugin execution for patches
-  _COMPOSER_ALLOW_SUPERUSER: 1
+  _COMPOSER_MEMORY_LIMIT: '-1'
 
 composer_install:
   before_script:
     - |
-      # Fix composer dependency conflict by removing the conflicting constraint
-      if [ -f "composer.json" ]; then
-        # Remove any existing cweagans/composer-patches constraint and add v2
-        sed -i 's/"cweagans\/composer-patches": "~1.0"/"cweagans\/composer-patches": "^2.0"/g' composer.json || true
-        # If not found, add it to require section
-        if ! grep -q "cweagans/composer-patches" composer.json; then
-          composer require cweagans/composer-patches:^2.0 --no-update --no-interaction
-        fi
-      fi
+      # Fix composer dependency conflict with cweagans/composer-patches
+      composer config --no-interaction --no-plugins allow-plugins.cweagans/composer-patches true
+      composer require --dev cweagans/composer-patches:^2.0 --no-update --no-interaction || true
+
+###
+###      ___           ___           ___           ___           ___       ___
+###     /\  \         /\  \         /\__\         /\  \         /\__\     /\  \
+###    /::\  \       /::\  \       /:/  /        /::\  \       /:/  /    /::\  \
+###   /:/\:\  \     /:/\:\  \     /:/  /        /:/\:\  \     /:/  /    /:/\:\  \
+###  /:/  \:\__\   /::\~\:\  \   /:/  /  ___   /::\~\:\  \   /:/  /    /::\~\:\  \
+### /:/__/ \:|__| /:/\:\ \:\__\ /:/__/  /\__\ /:/\:\ \:\__\ /:/__/    /:/\:\ \:\__\
+### \:\  \ /:/  / \/_|::\/:/  / \:\  \ /:/  / \/__\:\/:/  / \:\  \    \/__\:\/:/  /
+###  \:\  /:/  /     |:|::/  /   \:\  /:/  /       \::/  /   \:\  \        \::/  /
+###   \:\/:/  /      |:|\/__/     \:\/:/  /        /:/  /     \:\  \       /:/  /
+###    \::/__/       |:|  |        \::/  /        /:/  /       \:\__\     /:/  /
+###     ~~            \|__|         \/__/         \/__/         \/__/     \/__/
+###

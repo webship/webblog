@@ -12,10 +12,15 @@ variables:
   # Allow composer plugin execution for patches
   _COMPOSER_ALLOW_SUPERUSER: 1
 
-default:
+composer_install:
   before_script:
     - |
-      # Fix composer dependency conflict with cweagans/composer-patches
+      # Fix composer dependency conflict by removing the conflicting constraint
       if [ -f "composer.json" ]; then
-        composer require cweagans/composer-patches:^2.0 --no-update --no-interaction || true
+        # Remove any existing cweagans/composer-patches constraint and add v2
+        sed -i 's/"cweagans\/composer-patches": "~1.0"/"cweagans\/composer-patches": "^2.0"/g' composer.json || true
+        # If not found, add it to require section
+        if ! grep -q "cweagans/composer-patches" composer.json; then
+          composer require cweagans/composer-patches:^2.0 --no-update --no-interaction
+        fi
       fi

@@ -9,3 +9,13 @@ variables:
   # Skip the problematic validation jobs for now
   SKIP_PHPSTAN: 1
   SKIP_PHPCS: 1
+  # Allow composer plugin execution for patches
+  _COMPOSER_ALLOW_SUPERUSER: 1
+
+default:
+  before_script:
+    - |
+      # Fix composer dependency conflict with cweagans/composer-patches
+      if [ -f "composer.json" ]; then
+        composer require cweagans/composer-patches:^2.0 --no-update --no-interaction || true
+      fi

@@ -1,6 +1,5 @@
 include:
-  - project: 'drupalci_environments/drupalci_environments'
-    ref: 'production'
+  - project: 'project/gitlab_templates'
     file:
       - "/includes/include.drupalci.main.yml"
       - "/includes/include.drupalci.variables.yml"

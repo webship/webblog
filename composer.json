@@ -27,6 +27,7 @@
     "drupal/webdev": "11.0.x-dev",
     "drupal/webassets": "11.0.x-dev",
     "drupal/manage_display": "~3.0",
-    "drupal/entityqueue": "~1.0"
+    "drupal/entityqueue": "~1.0",
+    "cweagans/composer-patches": "^2.0"
   }
 }

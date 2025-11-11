@@ -9,12 +9,15 @@ include:
 variables:
   COMPOSER_FLAGS: "--no-strict-lock"
   COMPOSER_MEMORY_LIMIT: "-1"
-  DRUPAL_CORE: "^11.0-dev"
-  IGNORE_PROJECT_DRUPAL_CORE_VERSION: 0
 
+# Disable the default composer job and use the next-minor variant instead
 composer:
+  rules:
+    - when: never
+
+composer (next minor):
   variables:
-    DRUPAL_CORE: "^11.0-dev"
+    DRUPAL_CORE: $CORE_SUPPORTED
     IGNORE_PROJECT_DRUPAL_CORE_VERSION: 0
 
 cspell:

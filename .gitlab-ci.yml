@@ -9,6 +9,7 @@ include:
 variables:
   COMPOSER_FLAGS: "--no-strict-lock"
   COMPOSER_MEMORY_LIMIT: "-1"
+  DRUPAL_CORE: "11.0.x-dev"
 
 cspell:
   stage: validate

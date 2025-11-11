@@ -7,24 +7,10 @@ include:
       - "/includes/include.drupalci.workflows.yml"
 
 variables:
-  COMPOSER_FLAGS: "--no-strict-lock --with-all-dependencies"
+  COMPOSER_FLAGS: "--no-strict-lock"
   COMPOSER_MEMORY_LIMIT: "-1"
-
-debug_composer:
-  stage: test
-  image: registry.gitlab.com/drupal-infrastructure/drupalci/drupalci-environments/php-8.3-ubuntu-apache:production
-  script:
-    - cd $CI_PROJECT_DIR
-    - echo "=== COMPOSER.JSON ===" && cat composer.json
-    - echo "=== COMPOSER.JSON.BACKUP ===" && cat composer.json.backup || echo "No backup found"
-    - echo "=== ATTEMPTING INSTALL ==="
-    - composer install -vvv 2>&1 | head -100
-  artifacts:
-    paths:
-      - composer.json
-      - composer.json.backup
-    expire_in: 1 day
-  allow_failure: true
+  DRUPAL_CORE: "^11.0-dev"
+  IGNORE_PROJECT_DRUPAL_CORE_VERSION: 0
 
 cspell:
   stage: validate

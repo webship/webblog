@@ -12,6 +12,11 @@ variables:
   DRUPAL_CORE: "^11.0-dev"
   IGNORE_PROJECT_DRUPAL_CORE_VERSION: 0
 
+composer:
+  variables:
+    DRUPAL_CORE: "^11.0-dev"
+    IGNORE_PROJECT_DRUPAL_CORE_VERSION: 0
+
 cspell:
   stage: validate
   image: node:18

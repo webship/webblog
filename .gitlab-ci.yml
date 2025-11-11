@@ -10,12 +10,8 @@ variables:
   COMPOSER_FLAGS: "--no-strict-lock"
   COMPOSER_MEMORY_LIMIT: "-1"
 
-# Disable the default composer job and use the next-minor variant instead
+# Override the default composer job to use development versions
 composer:
-  rules:
-    - when: never
-
-composer (next minor):
   variables:
     DRUPAL_CORE: $CORE_SUPPORTED
     IGNORE_PROJECT_DRUPAL_CORE_VERSION: 0

@@ -21,16 +21,17 @@ composer:
 
 cspell:
   stage: validate
-  image: node:18
+  image: node:20
   before_script:
     - npm install -g cspell
   script:
     - cspell "**/*.{php,module,inc,install,test,profile,theme,js,css,md,yml,txt}" --no-progress || true
   allow_failure: true
 
+# Node 20+ required: webship-js >=2.0 declares engines.node ">=20".
 eslint:
   stage: validate
-  image: node:18
+  image: node:20
   before_script:
     - corepack enable
     - yarn install
@@ -43,7 +44,7 @@ eslint:
 
 stylelint:
   stage: validate
-  image: node:18
+  image: node:20
   before_script:
     - corepack enable
     - yarn install

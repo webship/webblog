@@ -14,6 +14,7 @@ install:
   - layout_discovery
   - manage_display
   - entityqueue
+  - webdev
   - webassets
 config:
   strict: false

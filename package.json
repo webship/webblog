@@ -19,7 +19,9 @@
     "phpcbf": "phpcbf --standard=./.phpcs.xml .",
     "lint:js": "node ./node_modules/eslint/bin/eslint.js .",
     "lint:css": "stylelint \"**/*.css\"",
-    "lint:yaml": "node ./node_modules/eslint/bin/eslint.js --ext .yml ."
+    "lint:yaml": "node ./node_modules/eslint/bin/eslint.js --ext .yml .",
+    "test": "cucumber-js --config cucumber.js",
+    "test:headed": "HEADLESS=false cucumber-js --config cucumber.js"
   },
   "devDependencies": {
     "eslint": "~8",
@@ -53,7 +55,7 @@
     "underscore": "~1",
     "webpack": "~5",
     "webpack-cli": "~5",
-    "webship-js": "~1"
+    "webship-js": "~2.0"
   },
   "browserslist": [
     "last 2 Chrome major versions",

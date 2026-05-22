@@ -10,8 +10,8 @@ third_party_settings:
     parent: 'main:'
 name: 'Web Blog'
 type: webblog
-description: ''
-help: ''
+description: 'Use <em>Web Blog</em> to publish blog posts with featured queues and listings.'
+help: 'Create a Web Blog entry. Provide a title and body; optionally attach a featured media image. Published entries appear in the Web Blogs listing.'
 new_revision: true
 preview_mode: 1
 display_submitted: true

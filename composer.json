@@ -23,9 +23,8 @@
   },
   "require": {
     "drupal/core": "~11.3.0",
-    "drupal/webpatches": "11.0.x-dev",
-    "drupal/webdev": "11.0.x-dev",
-    "drupal/webassets": "11.0.x-dev",
+    "drupal/webdev": "~11.0",
+    "drupal/webassets": "~11.0",
     "drupal/manage_display": "~3.0",
     "drupal/entityqueue": "~1.0"
   }

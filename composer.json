@@ -26,6 +26,7 @@
     "drupal/webdev": "~12.0@dev",
     "drupal/webassets": "~12.0@dev",
     "drupal/manage_display": "~3.0",
-    "drupal/entityqueue": "~1.0"
+    "drupal/entityqueue": "~1.0",
+    "drupal/display_builder": "^1.0@beta"
   }
 }

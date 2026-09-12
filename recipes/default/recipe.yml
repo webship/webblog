@@ -1,5 +1,5 @@
-name: Web Blog - Default
-description: A recipe to manage default installed modules, configs and permissions.
+name: 'Web Blog - Default'
+description: 'A recipe to manage default installed modules, configs and permissions.'
 type: install
 install:
   - path
@@ -8,13 +8,16 @@ install:
   - user
   - menu_ui
   - content_moderation
-  - field_layout
   - media_library
-  - layout_builder
-  - layout_discovery
   - manage_display
   - entityqueue
   - webdev
   - webassets
+  - display_builder
+  - display_builder_entity_view
+  - display_builder_ui
 config:
   strict: false
+  import:
+    display_builder:
+      - display_builder.profile.default

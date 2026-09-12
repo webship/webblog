@@ -6,96 +6,79 @@ dependencies:
     - field.field.node.webblog.field_media
     - node.type.webblog
   module:
-    - layout_builder
-    - layout_discovery
+    - display_builder
     - manage_display
     - text
 third_party_settings:
-  layout_builder:
-    enabled: true
-    allow_custom: false
-    sections:
+  display_builder:
+    profile: default
+    sources:
       -
-        layout_id: layout_onecol
-        layout_settings:
-          label: ''
-        components:
-          49490fc6-d003-44d3-95ae-5ad3ecea4bc3:
-            uuid: 49490fc6-d003-44d3-95ae-5ad3ecea4bc3
-            region: content
-            configuration:
-              id: 'field_block:node:webblog:body'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: text_default
-                label: hidden
-                settings: {  }
-                third_party_settings: {  }
-            weight: -7
-            additional: {  }
-          6a57bada-3f48-4295-890b-21f468043893:
-            uuid: 6a57bada-3f48-4295-890b-21f468043893
-            region: content
-            configuration:
-              id: 'field_block:node:webblog:field_media'
-              label: Media
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_entity_view
-                label: hidden
-                settings:
-                  view_mode: square
-                third_party_settings: {  }
-            weight: -10
-            additional: {  }
-          03be81ed-370c-4344-857e-7ff101fb919c:
-            uuid: 03be81ed-370c-4344-857e-7ff101fb919c
-            region: content
-            configuration:
-              id: 'field_block:node:webblog:title'
-              label: Title
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: title
-                label: hidden
-                settings:
-                  linked: false
-                  tag: h3
-                third_party_settings: {  }
-            weight: -8
-            additional: {  }
-          d3a2e170-5fc1-42ad-b2a0-ad1062577e4e:
-            uuid: d3a2e170-5fc1-42ad-b2a0-ad1062577e4e
-            region: content
-            configuration:
-              id: 'field_block:node:webblog:created'
-              label: 'Authored on'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: timestamp
-                label: hidden
-                settings:
-                  date_format: olivero_medium
-                  custom_date_format: ''
-                  timezone: ''
-                third_party_settings: {  }
-            weight: -9
-            additional: {  }
-        third_party_settings: {  }
+        source_id: entity_field
+        source:
+          derivable_context: 'field:node:webblog:field_media'
+          'field:node:webblog:field_media':
+            value:
+              sources:
+                -
+                  source_id: 'field_formatter:node:webblog:field_media'
+                  source:
+                    type: entity_reference_entity_view
+                    label: hidden
+                    settings:
+                      view_mode: square
+                    third_party_settings: {  }
+                    weight: -10
+      -
+        source_id: entity_field
+        source:
+          derivable_context: 'field:node:webblog:created'
+          'field:node:webblog:created':
+            value:
+              sources:
+                -
+                  source_id: 'field_formatter:node:webblog:created'
+                  source:
+                    type: timestamp
+                    label: hidden
+                    settings:
+                      date_format: olivero_medium
+                      custom_date_format: ''
+                      timezone: ''
+                    third_party_settings: {  }
+                    weight: -9
+      -
+        source_id: entity_field
+        source:
+          derivable_context: 'field:node:webblog:title'
+          'field:node:webblog:title':
+            value:
+              sources:
+                -
+                  source_id: 'field_formatter:node:webblog:title'
+                  source:
+                    type: title
+                    label: hidden
+                    settings:
+                      linked: false
+                      tag: h3
+                    third_party_settings: {  }
+                    weight: -8
+      -
+        source_id: entity_field
+        source:
+          derivable_context: 'field:node:webblog:body'
+          'field:node:webblog:body':
+            value:
+              sources:
+                -
+                  source_id: 'field_formatter:node:webblog:body'
+                  source:
+                    type: text_default
+                    label: hidden
+                    settings: {  }
+                    third_party_settings: {  }
+                    weight: -7
 id: node.webblog.default
 targetEntityType: node
 bundle: webblog

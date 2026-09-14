@@ -61,7 +61,7 @@ third_party_settings:
                     type: title
                     label: hidden
                     settings:
-                      linked: true
+                      link_to_entity: true
                       tag: h3
                     third_party_settings: {  }
                     weight: -7
@@ -117,7 +117,7 @@ content:
     type: title
     label: hidden
     settings:
-      linked: true
+      link_to_entity: true
       tag: h2
     third_party_settings: {  }
     weight: -49

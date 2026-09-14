@@ -243,7 +243,8 @@ display:
           entity_type: node
           plugin_id: entity_queue
           required: true
-          limit_queue: featured_webblogs
+          limit_queue:
+            - featured_webblogs
       display_description: ''
       display_extenders: {  }
     cache_metadata:

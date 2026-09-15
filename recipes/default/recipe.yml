@@ -1,6 +1,11 @@
 name: 'Web Blog - Default'
 description: 'A recipe to manage default installed modules, configs and permissions.'
 type: install
+# The Web Development and Web Assets modules are installed by this recipe, and
+# apply their default recipes only when installed on their own.
+recipes:
+  - modules/contrib/webdev/recipes/default
+  - modules/contrib/webassets/recipes/default
 install:
   - path
   - text
@@ -16,6 +21,8 @@ install:
   - display_builder
   - display_builder_entity_view
   - display_builder_ui
+  # Last, after its dependencies: the Web Blog module itself.
+  - webblog
 config:
   strict: false
   import:

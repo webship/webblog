@@ -3,7 +3,6 @@
   "description": "Enhances your Drupal site by introducing a versatile Blog content type along with customized views for the home page and dedicated blog pages.",
   "type": "drupal-module",
   "license": "GPL-1.0-or-later",
-  "minimum-stability": "dev",
   "authors": [
     {
       "name": "Webship",

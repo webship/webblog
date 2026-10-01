@@ -3,13 +3,13 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.field.node.webblog.body
+    - field.field.node.webblog.field_body
     - field.field.node.webblog.field_media
+    - field.field.node.webblog.field_summary
     - node.type.webblog
   module:
     - display_builder
     - manage_display
-    - text
 third_party_settings:
   display_builder:
     profile: default
@@ -68,31 +68,16 @@ third_party_settings:
       -
         source_id: entity_field
         source:
-          derivable_context: 'field:node:webblog:body'
-          'field:node:webblog:body':
+          derivable_context: 'field:node:webblog:field_summary'
+          'field:node:webblog:field_summary':
             value:
               sources:
                 -
-                  source_id: 'field_formatter:node:webblog:body'
+                  source_id: 'field_formatter:node:webblog:field_summary'
                   source:
-                    type: smart_trim
+                    type: basic_string
                     label: hidden
-                    settings:
-                      trim_length: 200
-                      trim_type: chars
-                      trim_suffix: ''
-                      wrap_output: true
-                      wrap_class: trimmed
-                      more_link: true
-                      more_class: more-link
-                      more_text: 'Read more...'
-                      more_aria_label: 'Read more about [node:title]'
-                      summary_handler: full
-                      trim_options:
-                        text: true
-                        trim_zero: false
-                        replace_tokens: false
-                      token_browser: ''
+                    settings: {  }
                     third_party_settings: {  }
                     weight: -6
 id: node.webblog.teaser
@@ -100,11 +85,10 @@ targetEntityType: node
 bundle: webblog
 mode: teaser
 content:
-  body:
-    type: text_summary_or_trimmed
+  field_summary:
+    type: basic_string
     label: hidden
-    settings:
-      trim_length: 600
+    settings: {  }
     third_party_settings: {  }
     weight: 101
     region: content
@@ -124,5 +108,7 @@ content:
     region: content
 hidden:
   created: true
+  field_body: true
   field_media: true
+  field_summary: true
   uid: true

@@ -3,8 +3,9 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.full
-    - field.field.node.webblog.body
+    - field.field.node.webblog.field_body
     - field.field.node.webblog.field_media
+    - field.field.node.webblog.field_summary
     - node.type.webblog
   module:
     - display_builder
@@ -68,12 +69,12 @@ third_party_settings:
       -
         source_id: entity_field
         source:
-          derivable_context: 'field:node:webblog:body'
-          'field:node:webblog:body':
+          derivable_context: 'field:node:webblog:field_body'
+          'field:node:webblog:field_body':
             value:
               sources:
                 -
-                  source_id: 'field_formatter:node:webblog:body'
+                  source_id: 'field_formatter:node:webblog:field_body'
                   source:
                     type: text_default
                     label: hidden
@@ -85,7 +86,7 @@ targetEntityType: node
 bundle: webblog
 mode: full
 content:
-  body:
+  field_body:
     type: text_default
     label: hidden
     settings: {  }
@@ -117,4 +118,6 @@ content:
     region: content
 hidden:
   created: true
+  field_body: true
+  field_summary: true
   uid: true

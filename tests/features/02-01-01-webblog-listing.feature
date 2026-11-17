@@ -9,8 +9,10 @@ Feature: Web Blog in the content admin listing
   Scenario: A new webblog appears in the admin content listing
     When I navigate to "/node/add/webblog"
      And I fill in "Listing Test Post" for "Title"
-     And I press "Save"
+     And I save the content
     Then I should see "has been created"
     When I navigate to "/admin/content"
     Then I should see "Listing Test Post"
      And I should see "Web Blog"
+    When I delete the content item I created
+    Then I should see "has been deleted"

@@ -20,6 +20,8 @@ Feature: Web Blog content type
   Scenario: Admin can create a webblog post with title only
     When I navigate to "/node/add/webblog"
      And I fill in "First Blog Post" for "Title"
-     And I press "Save"
+     And I save the content
     Then I should see "has been created"
      And I should see "First Blog Post"
+    When I delete the content item I created
+    Then I should see "has been deleted"
